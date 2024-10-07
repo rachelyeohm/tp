@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in the location book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -23,21 +23,19 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Location location;
     private final Remark remark; // default value is an empty string
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags, remark);
+    public Person(Name name, Phone phone, Email email, Location location, Remark remark) {
+        requireAllNonNull(name, phone, email, location, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.location = location;
         this.remark = remark;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -52,20 +50,12 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Location getAddress() {
+        return location;
     }
 
     public Remark getRemark() {
         return remark;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -100,14 +90,13 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && location.equals(otherPerson.location);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, location);
     }
 
     @Override
@@ -116,9 +105,8 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("location", location)
                 .add(" remark", remark)
-                .add("tags", tags)
                 .toString();
     }
 
