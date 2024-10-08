@@ -42,8 +42,9 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Location: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
+                .append(person.getLocation())
+                .append("; Remark: ")
+                .append(person.getRemark());
         return builder.toString();
     }
 

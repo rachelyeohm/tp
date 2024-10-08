@@ -50,7 +50,7 @@ public class Person {
         return email;
     }
 
-    public Location getAddress() {
+    public Location getLocation() {
         return location;
     }
 

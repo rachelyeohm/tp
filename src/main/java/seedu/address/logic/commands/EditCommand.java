@@ -93,7 +93,7 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Location updatedLocation = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Location updatedLocation = editPersonDescriptor.getAddress().orElse(personToEdit.getLocation());
         Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedLocation, updatedRemark);
