@@ -19,24 +19,26 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD_SHORT = ":a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: \n"
-            + formatMessage(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_REMARK)
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT +  ": Adds a person to " +
+        "the address book. \n"
+            + "Parameters for :add : \n"
+            + formatParameters(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_REMARK)
             + "\nExample: \n"
             + COMMAND_WORD + " "
             + formatExample(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_REMARK, "John Doe",
             "98765432", "johnd@example.com", "311, Clementi Ave 2, #02-25", "Likes to swim")
-            + "\nOr using short prefixes: \n"
-            + formatMessage(PREFIX_NAME_SHORT, PREFIX_PHONE_SHORT, PREFIX_EMAIL_SHORT, PREFIX_LOCATION_SHORT,
+
+            + "\nParameters for :a : \n"
+            + formatParameters(PREFIX_NAME_SHORT, PREFIX_PHONE_SHORT, PREFIX_EMAIL_SHORT, PREFIX_LOCATION_SHORT,
             PREFIX_REMARK_SHORT)
             + "\nExample: \n"
-            + COMMAND_WORD + " "
+            + COMMAND_WORD_SHORT + " "
             + formatExample(PREFIX_NAME_SHORT, PREFIX_PHONE_SHORT, PREFIX_EMAIL_SHORT, PREFIX_LOCATION_SHORT,
             PREFIX_REMARK_SHORT, "John Doe", "98765432", "johnd@example.com", "311, " +
                     "Clementi Ave 2, #02-25", "Likes to swim");
 
-    private static String formatMessage(Prefix prefixName, Prefix prefixPhone, Prefix prefixEmail,
-                                        Prefix prefixLocation, Prefix prefixRemark) {
+    private static String formatParameters(Prefix prefixName, Prefix prefixPhone, Prefix prefixEmail,
+                                           Prefix prefixLocation, Prefix prefixRemark) {
         return prefixName + "NAME "
                 + prefixPhone + "PHONE "
                 + prefixEmail + "EMAIL "

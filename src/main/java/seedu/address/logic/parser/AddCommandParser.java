@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_SHORT;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Location;
 import seedu.address.model.person.Email;
@@ -25,12 +26,18 @@ import seedu.address.model.person.Remark;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+
+    @Override
+    public AddCommand parse(String args) throws ParseException {
+        return parse(AddCommand.COMMAND_WORD, args);
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddCommand parse(String commandWord, String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION);
 
@@ -39,10 +46,12 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_LOCATION_SHORT);
 
         if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LOCATION, PREFIX_PHONE, PREFIX_EMAIL)
-                && argMultimap.getPreamble().isEmpty()) {
+                && argMultimap.getPreamble().isEmpty()
+                && commandWord.equals(AddCommand.COMMAND_WORD)) {
             return new AddCommand(createPerson(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION));
         } else if (arePrefixesPresent(argMultimapShort, PREFIX_NAME_SHORT, PREFIX_LOCATION_SHORT, PREFIX_PHONE_SHORT,
-                PREFIX_EMAIL_SHORT) && argMultimapShort.getPreamble().isEmpty()) {
+                PREFIX_EMAIL_SHORT) && argMultimapShort.getPreamble().isEmpty()
+                && commandWord.equals(AddCommand.COMMAND_WORD_SHORT)) {
             return new AddCommand(createPerson(argMultimapShort, PREFIX_NAME_SHORT, PREFIX_PHONE_SHORT, PREFIX_EMAIL_SHORT,
                     PREFIX_LOCATION_SHORT));
         } else {
@@ -82,5 +91,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+
 
 }
